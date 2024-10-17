@@ -1,6 +1,6 @@
 // Importaciones
-import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import EmployeeList from './components/EmployeeList';
 import PayrollMenu from './components/PayrollMenu';
@@ -8,14 +8,10 @@ import PayrollPage from './components/PayrollPage';
 import PayrollReport from './components/PayrollReport';
 import PaySlipForm from './components/PaySlipForm';
 import PaySlipPDF from './components/PaySlipPDF';
+import axios from 'axios';
 
 //Array de objetos con información inicial
-const initialEmployees = [
-    { id: 1, name: 'Juan Pérez', position: 'Supervisor', salary: 1.37, image: '/images/empleado1.jpg' },
-    { id: 2, name: 'Marta Gómez', position: 'Vendedor', salary: 1.37, image: '/images/empleado2.jpg'  },
-    { id: 3, name: 'Luis Martínez', position: 'Almacenista', salary: 1.37, image: '/images/empleado3.jpg'  },
-    { id: 4, name: 'Jhon García', position: 'Repartidor', salary: 1.37, image: '/images/empleado4.jpg'  },
-];
+const initialEmployees = [];
 
 // Array que simula datos que podría recibir de una base de datos
 const initialPayrollData = [
@@ -35,16 +31,44 @@ const initialPayrollData = [
     { time: '2024-07-01', value: 75000 },
 ];
 
-//Deficnición del componente App
+const mapEmployeeData = (employee) => {
+    return {
+        id: employee._id,
+        name: employee.nombre, 
+        position: employee.puesto,
+        salary: employee.salarioPorHora,
+        image: employee.imagen,
+      // Agrega más mapeos según sea necesario
+    };
+};
+
+//Definición del componente App
 const App = () => {
-const [employees] = useState(initialEmployees);
+const [employees, setEmployees] = useState(initialEmployees);
 const [payrollData] = useState(initialPayrollData);
 const [payrollItems, setPayrollItems] = useState([]);
 const [showPayrollMenu, setShowPayrollMenu] = useState(false);
 const [paymentInfo, setPaymentInfo] = useState({});
 const navigate = useNavigate();
+const location = useLocation();
 
 //Funciones
+useEffect(() => {
+    const fetchEmployees = async () => {
+        try {
+        const response = await axios.get('http://localhost:5000/api/empleados');
+        console.log('Empleados desde la API:', response.data);
+        const mappedEmployees = response.data.map(mapEmployeeData);
+        setEmployees(mappedEmployees);
+    } catch (error) {
+        console.error('Error al obtener los empleados', error);
+    }
+    };
+    if (location.pathname === '/') {
+        fetchEmployees();
+    }
+}, [location.pathname]);
+
 const handleAddToPayroll = (employee, quantity) => {
     const existingItem = payrollItems.find(item => item.employee.id === employee.id);
     if (existingItem) {
