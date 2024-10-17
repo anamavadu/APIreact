@@ -9,6 +9,8 @@ import PayrollReport from './components/PayrollReport';
 import PaySlipForm from './components/PaySlipForm';
 import PaySlipPDF from './components/PaySlipPDF';
 import axios from 'axios';
+import Register from './components/Register';
+import Login from './components/Login';
 
 //Array de objetos con información inicial
 const initialEmployees = [];
@@ -108,6 +110,11 @@ const handlePaymentInfo = (info) => {
     setPaymentInfo(info);
 };
 
+const PrivateRoute = ({ children }) => {
+    const role = localStorage.getItem('role');
+    return role === 'admin' ? children : <div>No tienes acceso a esta página</div>;
+};
+
 //Renderizado del componente
 return (
     <div className="app">
@@ -133,6 +140,8 @@ return (
         <Route path="/payroll-report" element={<PayrollReport data={payrollData} />} />
         <Route path="/pay-slip" element={<PaySlipForm payrollItems={payrollItems} />} />
         <Route path="/pay-slip-pdf" element={<PaySlipPDF />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         
     </Routes>
 

@@ -1,6 +1,7 @@
 // Importaciones necesarias desde React y react-router-dom para la navegación
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // Definición del componente 'PaySlipForm'
 const PaySlipForm = ({ payrollItems }) => {
@@ -14,12 +15,31 @@ const handleChange = (e) => {
 };
 
 // Maneja el envío del formulario
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     const paymentCode = Math.floor(Math.random() * 1000000); // Genera un código de pago aleatorio
-    console.log(payrollItems);
-    navigate('/pay-slip-pdf', { state: { ...formData, payrollItems, paymentCode } }); // Navega a la página de PDF con los datos del formulario y de la nómina
-};
+
+    const salario = {
+        gestor: localStorage.getItem('userId'), 
+        salario: payrollItems.map(item => ({
+        empleado: item.employee.id,
+        horasTrabajadas: item.quantity
+        })),
+        totalSalarios: payrollItems.reduce((sum, item) => sum + item.employee.salary * item.quantity, 0), 
+        fechaPago: formData.paydate, 
+        nombrePago: 'Pago de Nómina',
+        codigoPago: paymentCode,
+    };
+    
+      console.log(salario); // Añadir esta línea para verificar el objeto salario
+    
+    try {
+        await axios.post('http://localhost:5000/api/salarios/nuevo', salario);
+        navigate('/pay-slip-pdf', { state: { ...formData, payrollItems, paymentCode } });
+    } catch (error) {
+        console.error('Error al enviar la nómina', error);
+    }
+    };
 
 //Renderizado del componente
 return (
