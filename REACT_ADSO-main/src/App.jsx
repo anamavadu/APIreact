@@ -11,6 +11,7 @@ import PaySlipPDF from './components/PaySlipPDF';
 import axios from 'axios';
 import Register from './components/Register';
 import Login from './components/Login';
+import ManageEmployees from './components/ManageEmployees';
 
 //Array de objetos con información inicial
 const initialEmployees = [];
@@ -142,6 +143,7 @@ return (
         <Route path="/pay-slip-pdf" element={<PaySlipPDF />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/manage-employees" element={<PrivateRoute><ManageEmployees /></PrivateRoute>} />
         
     </Routes>
 
