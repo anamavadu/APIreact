@@ -66,3 +66,16 @@ exports.eliminarSalario = async (req, res, next) => {
         next();
     }
 };
+
+// Muestra todos los salarios de un usuario (gestor) específico
+exports.mostrarSalariosGestor = async (req, res, next) => {
+    try {
+        const salarios = await Salario.find({ gestor: req.params.idGestor })
+            .populate('gestor', '-password')
+            .populate('salario.empleado');
+        res.json(salarios);
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};

@@ -12,7 +12,7 @@ import axios from 'axios';
 import Register from './components/Register';
 import Login from './components/Login';
 import ManageEmployees from './components/ManageEmployees';
-
+import Salarios from './components/Salarios';
 //Array de objetos con información inicial
 const initialEmployees = [];
 
@@ -103,6 +103,14 @@ const handleReduceQuantity = (employeeId) => {
     }
 };
 
+const handleIncreaseQuantity = (employeeId) => {
+    setPayrollItems(payrollItems.map(item =>
+        item.employee.id === employeeId
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    ));
+};
+
 const handleClosePayrollMenu = () => {
     setShowPayrollMenu(false);
 };
@@ -135,6 +143,7 @@ return (
             onAddToPayroll={handleAddToPayroll}
             onRemoveFromPayroll={handleRemoveFromPayroll}
             onReduceQuantity={handleReduceQuantity}
+            onIncreaseQuantity={handleIncreaseQuantity}
         />}
         />
         
@@ -144,7 +153,8 @@ return (
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/manage-employees" element={<PrivateRoute><ManageEmployees /></PrivateRoute>} />
-        
+        <Route path="/salarios" element={<Salarios />} /> {/* Nueva ruta para el componente Salarios */}
+
     </Routes>
 
     {showPayrollMenu && (
@@ -154,6 +164,7 @@ return (
         onAddToPayroll={handleAddToPayroll}
         onRemoveFromPayroll={handleRemoveFromPayroll}
         onReduceQuantity={handleReduceQuantity}
+        onIncreaseQuantity={handleIncreaseQuantity}
         />
     )}
 

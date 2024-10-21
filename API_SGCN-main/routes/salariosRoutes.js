@@ -17,4 +17,7 @@ router.put('/salarios/:idSalario', salariosController.actualizarSalario);
 // Elimina una nómina
 router.delete('/salarios/:idSalario', salariosController.eliminarSalario);
 
+// Muestra todos los salarios del usuario (gestor) por su ID
+router.get('/salarios/gestor/:idGestor', salariosController.mostrarSalariosGestor);
+
 module.exports = router;

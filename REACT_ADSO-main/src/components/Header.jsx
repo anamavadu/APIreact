@@ -25,7 +25,7 @@ useEffect(() => {
 }, []);
 return (
     <header className="header">
-    <h1>Aplicación de Gestión de Salarios</h1>
+    <h1>PayLogic</h1>
     <nav>
 {/* Enlace a la página de nómina, mostrando el conteo de empleados en la nómina */}
         <Link to="/">Inicio</Link>
@@ -36,6 +36,7 @@ return (
         {user.role === 'admin' && <Link to="/manage-employees">G.Empleados</Link>}
         {user.username ? (
         <>
+        <Link to="/salarios">Mi Nómina</Link> {/* Enlace a los salarios */}
             <span>Bienvenido, {user.username} ({user.role})</span>
             <Link to="/" onClick={handleLogout}>Cerrar S.</Link>
         </>
