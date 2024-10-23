@@ -14,6 +14,8 @@ import Login from './components/Login';
 import ManageEmployees from './components/ManageEmployees';
 import Salarios from './components/Salarios';
 import ManagePayrolls from './components/ManagePayrolls'; // Importar componente de gestión de nómina
+import UpdateUser from './components/UpdateUser'; // Importar el componente de actualización de usuario
+
 //Array de objetos con información inicial
 const initialEmployees = [];
 
@@ -154,9 +156,10 @@ return (
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/manage-employees" element={<PrivateRoute><ManageEmployees /></PrivateRoute>} />
-        <Route path="/salarios" element={<Salarios />} /> {/* Nueva ruta para el componente Salarios */}
-        <Route path="/manage-payroll" element={<PrivateRoute><ManagePayrolls /></PrivateRoute>} /> {/* Ruta para gestionar la nómina */}
-    </Routes>
+        <Route path="/salarios" element={<Salarios />} />
+        <Route path="/manage-payroll" element={<PrivateRoute><ManagePayrolls /></PrivateRoute>} /> 
+        <Route path="/update-user" element={<UpdateUser />} /> 
+        </Routes>
 
     {showPayrollMenu && (
         <PayrollMenu

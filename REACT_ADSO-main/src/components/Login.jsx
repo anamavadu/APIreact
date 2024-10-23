@@ -19,6 +19,7 @@ const handleSubmit = async (e) => {
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('role', response.data.role); // Guardar el rol del usuario
         localStorage.setItem('userId', response.data.userId); // Guardar el ID del usuario
+        localStorage.setItem('email', response.data.email); // Almacena el email
         window.dispatchEvent(new Event('storage')); // Disparar evento de almacenamiento
         navigate('/');
     } catch (error) {
