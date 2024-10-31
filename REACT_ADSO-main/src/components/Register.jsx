@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 const Register = () => {
 const [formData, setFormData] = useState({
     username: '',
@@ -31,21 +32,21 @@ const handleSubmit = async (e) => {
 return (
     <div className="payment-form">
     <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <h2>Regístrate</h2>
         {message && <p>{message}</p>}
         <label>
-            Username:
+            Nombre de usuario:
         <input type="text" name="username" value={formData.username} onChange={handleChange} />
         </label>
         <label>
-            Email:
+            Correo electrónico:
         <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </label>
         <label>
-            Password:
+            Contraseña:
         <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </label>
-        <button type="submit">Register</button>
+        <button type="submit">Regístrate</button>
     </form>
     </div>
     );

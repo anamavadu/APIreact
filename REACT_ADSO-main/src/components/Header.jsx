@@ -28,7 +28,7 @@ return (
     <h1>PayLogic</h1>
     <nav>
         <Link to="/">Inicio</Link> 
-        <Link to="/payroll-page">Nómina ({payrollCount})</Link> {/* Enlace a la página de nómina, mostrando el conteo de empleados en la nómina */}
+        <Link to="/payroll-page">Nóminas ({payrollCount})</Link> {/* Enlace a la página de nómina, mostrando el conteo de empleados en la nómina */}
         <Link to="/payroll-report">Reporte de Nómina</Link> {/* Enlace a la página de reporte de nómina */}
         {user.role === 'admin' && <Link to="/manage-employees">G.Empleados</Link>}
         {user.role === 'admin' && <Link to="/manage-payroll">G. Nómina</Link>} {/* Enlace a la gestión de pedidos */}
@@ -40,8 +40,8 @@ return (
         </>
         ) : (
         <>
-        <Link to="/register">Registro</Link>
-            <Link to="/login">Ingresar</Link>
+        <Link to="/register">Registrarse</Link>
+            <Link to="/login">Iniciar sesión</Link>
         </>
         )}
     </nav>

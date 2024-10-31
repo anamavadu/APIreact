@@ -29,17 +29,17 @@ const handleSubmit = async (e) => {
 return (
     <div className="payment-form">
     <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>Iniciar sesión</h2>
         {message && <p>{message}</p>}
         <label>
-            Email:
+            Correo electrónico:
         <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </label>
         <label>
-            Password:
+            Contraseña:
         <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">Ingresar</button>
     </form>
     </div>
 );
