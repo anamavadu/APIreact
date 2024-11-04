@@ -157,7 +157,7 @@ return (
         <Route path="/login" element={<Login />} />
         <Route path="/manage-employees" element={<PrivateRoute><ManageEmployees /></PrivateRoute>} />
         <Route path="/salarios" element={<Salarios />} />
-        <Route path="/manage-payroll" element={<PrivateRoute><ManagePayrolls /></PrivateRoute>} /> 
+        <Route path="/manage-payrolls" element={<PrivateRoute><ManagePayrolls /></PrivateRoute>} /> 
         <Route path="/update-user" element={<UpdateUser />} /> 
         </Routes>
 

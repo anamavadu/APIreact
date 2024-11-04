@@ -31,7 +31,7 @@ return (
         <Link to="/payroll-page">Nóminas ({payrollCount})</Link> {/* Enlace a la página de nómina, mostrando el conteo de empleados en la nómina */}
         <Link to="/payroll-report">Reporte de Nómina</Link> {/* Enlace a la página de reporte de nómina */}
         {user.role === 'admin' && <Link to="/manage-employees">G.Empleados</Link>}
-        {user.role === 'admin' && <Link to="/manage-payroll">G. Nómina</Link>} {/* Enlace a la gestión de pedidos */}
+        {user.role === 'admin' && <Link to="/manage-payrolls">G. Nómina</Link>} {/* Enlace a la gestión de pedidos */}
         {user.username ? (
         <>
         <Link to="/salarios">Mi Nómina</Link> {/* Enlace a los salarios */}
