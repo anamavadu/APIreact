@@ -7,7 +7,7 @@ import axios from 'axios';
 const PaySlipForm = ({ payrollItems }) => {
 // Estado local para los datos del formulario
     const [formData, setFormData] = useState({ period: '', paydate: '', employeespaid: '' });
-    const navigate = seuNavigate();
+    const navigate = useNavigate();
 
 // Maneja los cambios en los campos del formulario
 const handleChange = (e) => {
