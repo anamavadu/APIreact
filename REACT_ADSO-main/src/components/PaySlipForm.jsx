@@ -34,7 +34,7 @@ const handleSubmit = async (e) => {
       console.log(salario); // Añadir esta línea para verificar el objeto salario
     
     try {
-        await axios.post('http://localhost:5000/api/salarios/nuevo', salario);
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/salarios/nuevo`, salario);
         navigate('/pay-slip-pdf', { state: { ...formData, payrollItems, paymentCode } });
     } catch (error) {
         console.error('Error al enviar la nómina', error);

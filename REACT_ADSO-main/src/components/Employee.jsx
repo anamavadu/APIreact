@@ -6,7 +6,7 @@ const Employee = ({ employee, onAddToPayroll }) => {
 // Estado local 'quantity' con su función de actualización 'setQuantity', inicializado en 1
 const [quantity, setQuantity] = useState(1);
 
-const imageURL = `http://localhost:5000/uploads/${employee.imagen}`;
+const imageURL = employee.imagen;
 
 // Renderizado del componente
 return (

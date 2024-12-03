@@ -14,7 +14,7 @@ useEffect(() => {
     const fetchSalarios = async () => {
     try {
         // Realizamos una solicitud GET a la API para obtener los salarios del gestor
-        const response = await axios.get(`http://localhost:5000/api/salarios/gestor/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/salarios/gestor/${userId}`);
         // Ordenamos los salarios por fecha de creación en orden descendente
         const sortedSalarios = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         // Actualizamos el estado 'salarios' con los datos obtenidos y ordenados de la API
@@ -49,7 +49,7 @@ return (
             <h3>Detalles de nómina</h3>
             {salario.salario.map(item => (
                 <div key={item._id} className="salario-item">
-                    <img src={`http://localhost:5000/uploads/${item.empleado?.imagen}`} alt={item.empleado?.nombre} className="employee-image" />
+                    <img src={item.empleado?.imagen} alt={item.empleado?.nombre} className="employee-image" />
                     <div className="item-details">
                     <p><strong>Empleado:</strong> {item.empleado?.nombre || 'Empleado eliminado'}</p>
                     <p><strong>Horas Trabajadas:</strong> {item.horasTrabajadas}</p>

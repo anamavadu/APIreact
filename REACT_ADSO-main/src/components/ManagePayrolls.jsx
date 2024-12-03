@@ -14,7 +14,7 @@ const ManagePayrolls = () => {
     const fetchPayrolls = async () => {
                 try {
         // Realiza una solicitud GET a la API para obtener los salarios
-        const response = await axios.get('http://localhost:5000/api/salarios');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/salarios`);
         // Ordena los salarios por fecha de creación en orden descendente
         const sortedPayrolls = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setPayrolls(sortedPayrolls); // Actualiza el estado de los salarios

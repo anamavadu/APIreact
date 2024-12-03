@@ -62,7 +62,7 @@ const location = useLocation();
 useEffect(() => {
     const fetchEmployees = async () => {
         try {
-        const response = await axios.get('http://localhost:5000/api/empleados');
+        const response = await axios.get('${import.meta.env.VITE_API_URL}/api/empleados');
         console.log('Empleados desde la API:', response.data);
         const mappedEmployees = response.data.map(mapEmployeeData);
         setEmployees(mappedEmployees);

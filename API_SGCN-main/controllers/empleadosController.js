@@ -1,25 +1,22 @@
 const Empleado = require('../models/Empleado');
 const multer = require('multer');
 const shortid = require('shortid');
-const path = require('path');
+const { cloudinary, storage } = require('../config/cloudinaryConfig');
 
-// Configuración de 'multer' para la carga de archivos
 const configuracionMulter = {
-    storage: multer.diskStorage({
-        // Define el directorio de destino donde se guardarán los archivos
-        destination: (req, file, cb) => {
-            const uploadsDir = path.join(__dirname, '../uploads'); // Usar path.join para asegurar compatibilidad SO
-            cb(null, uploadsDir);
-        },
-        // Define el nombre del archivo subido, utilizando 'shortid' y su extensión original
-        filename: (req, file, cb) => {
-            const extension = file.mimetype.split('/')[1];
-            cb(null, `${shortid.generate()}.${extension}`);
-        }
-    }),
-    // Filtro para aceptar solo ciertos tipos de archivos (imágenes JPEG, PNG o GIF)
+    /*    storage: multer.diskStorage({
+            destination: (req, file, cb) => {
+                const uploadsDir = path.join(__dirname, '../uploads'); // Usar path.join para asegurar compatibilidad SO
+                cb(null, uploadsDir);
+    @@ -13,7 +14,10 @@ const configuracionMulter = {
+                const extension = file.mimetype.split('/')[1];
+                cb(null, `${shortid.generate()}.${extension}`);
+            }
+        }),*/
+        storage: storage, // Usar el almacenamiento de Cloudinary configurado
+    
     fileFilter(req, file, cb) {
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif') {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'image/webp') {
             cb(null, true);
         } else {
             cb(new Error('Formato No válido'));
@@ -44,7 +41,8 @@ exports.nuevoEmpleado = async (req, res, next) => {
     const empleado = new Empleado(req.body);
     try {
         if (req.file) {
-            empleado.imagen = req.file.filename;
+            //empleado.imagen = req.file.filename;
+            empleado.imagen = req.file.path; // Guardar la URL de Cloudinary
         }
         await empleado.save();
         res.json({ mensaje: 'Se agregó un nuevo empleado' });
@@ -82,7 +80,8 @@ exports.actualizarEmpleado = async (req, res, next) => {
     try {
         let nuevoEmpleado = req.body;
         if (req.file) {
-            nuevoEmpleado.imagen = req.file.filename;
+            //nuevoEmpleado.imagen = req.file.filename;
+            nuevoEmpleado.imagen = req,file.path; // Guardar la URL de Cloudinary
         } else {
             let empleadoAnterior = await Empleado.findById(req.params.idEmpleado);
             nuevoEmpleado.imagen = empleadoAnterior.imagen;

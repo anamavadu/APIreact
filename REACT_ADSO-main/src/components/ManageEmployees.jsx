@@ -12,7 +12,7 @@ const ManageEmployees = () => {
 
     const fetchEmployees = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/empleados');
+            const response = await axios.get('${import.meta.env.VITE_API_URL}/api/empleados');
             setEmployees(response.data);
         } catch (error) {
             setErrorMessage('Error al obtener los empleados');
@@ -25,7 +25,7 @@ const ManageEmployees = () => {
 
     const handleDeleteEmployee = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/empleados/${id}`);
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/empleados/${id}`);
             fetchEmployees();
             setSuccessMessage(response.data.mensaje || 'Empleado eliminado con éxito');
             setTimeout(() => setSuccessMessage(''), 1000);
@@ -47,7 +47,7 @@ const ManageEmployees = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:5000/api/empleados/busqueda/${searchQuery}`);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/empleados/busqueda/${searchQuery}`);
             setEmployees(response.data);
             if (response.data.length === 0) {
                 setErrorMessage('No se encontraron empleados');
@@ -93,13 +93,7 @@ const ManageEmployees = () => {
                             <td>${employee.salarioPorHora}</td>
                             <td>{new Date(employee.fechaContratacion).toLocaleDateString()}</td>
                             <td>
-                                {employee.imagen && (
-                                    <img
-                                        src={`http://localhost:5000/uploads/${employee.imagen}`}
-                                        alt={employee.nombre}
-                                        width="100"
-                                    />
-                                )}
+                                {employee.imagen && <img src={employee.imagen} alt={employee.nombre} width="100"/>}
                             </td>
                             <td>
                                 <button

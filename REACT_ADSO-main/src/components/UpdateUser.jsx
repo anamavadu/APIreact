@@ -58,7 +58,7 @@ const updatedUser = {};
 
 // Realiza la petición de actualización al servidor.
 const response = await axios.put(
-    'http://localhost:5000/api/auth/update',
+    `${import.meta.env.VITE_API_URL}/api/auth/update`,
     updatedUser,
     {
         headers: {

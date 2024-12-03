@@ -6,7 +6,7 @@ const ModalPayrolls = ({ payroll, setSelectedPayroll, setPayrolls, setFilteredPa
 
 const handleUpdatePayroll = async (updatedPayroll) => {
     try {
-    const response = await axios.put(`http://localhost:5000/api/salarios/${updatedPayroll._id}`, updatedPayroll);
+    const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/salarios/${updatedPayroll._id}`, updatedPayroll);
     setPayrolls(payrolls.map(o => (o._id === updatedPayroll._id ? response.data : o)));
     setFilteredPayrolls(filteredPayrolls.map(o => (o._id === updatedPayroll._id ? response.data : o)));
     setSelectedPayroll(null);
@@ -21,7 +21,7 @@ const confirmDeletePayroll = () => {
 
 const handleDeletePayroll = async () => {
     try {
-    await axios.delete(`http://localhost:5000/api/salarios/${payrollToDelete}`);
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/salarios/${payrollToDelete}`);
     setPayrolls(payrolls.filter(o => o._id !== payrollToDelete));
     setFilteredPayrolls(filteredPayrolls.filter(o => o._id !== payrollToDelete));
     setPayrollToDelete(null);

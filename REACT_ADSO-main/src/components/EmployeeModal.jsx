@@ -52,13 +52,13 @@ const handleSubmit = async (e) => {
 try {
     let response;
     if (employeeToEdit) {
-        response = await axios.put(`http://localhost:5000/api/empleados/${employeeToEdit._id}`, formData, {
+        response = await axios.put(`${import.meta.env.VITE_API_URL}/api/empleados/${employeeToEdit._id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         });
     } else {
-        response = await axios.post('http://localhost:5000/api/empleados', formData, {
+        response = await axios.post(`${import.meta.env.VITE_API_URL}/api/empleados`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
